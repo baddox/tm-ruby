@@ -12,13 +12,13 @@ Each State has a name (for display purposes only) and three rules (one for each 
 
 There can be any number of halting States, each with a message (for convenience). Real Turing Machines generally leave a representation of their resulting value on the tape when they halt.
 
-## Example: Computer the input contains an odd or an even number of 1's
+## Example: Compute whether the input contains an odd or an even number of 1's
 
 This example Turing Machine takes an input tape of some number of consecutive 1's. It determines whether the number of 1's is even or odd, and halts with a message politely telling you its conclusion.
 
 Note that this implementation has undefined behavior for input tapes that contain anything other than zero or more consecutive 1's. It will probably crash on any other inputs, due to States not specifying rules for all three Syms.
 
-It works by moving right, each step alternating between two states that remember if the current number of 1's is even or odd, then halting with the corresponding even or odd State when it encounters the first blank cell.
+It works by moving right, each step alternating between two states that remember if the number of 1's so far is even or odd, then halting with the corresponding even or odd State when it encounters the first blank cell.
 
 ### Code
 

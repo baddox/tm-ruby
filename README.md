@@ -10,7 +10,15 @@ A Sym is either BLANK, ONE, or ZERO.
 
 Each State has a name (for display purposes only) and three rules (one for each Sym). Each rule says what Sym the head should write, which direction (if any) the head should move, and finally which State to switch to.
 
+There can be any number of halting States, each with a message (for convenience).
+
 ## Example: Computer the input contains an odd or an even number of 1's
+
+This example Turing Machine takes an input tape of some number of consecutive 1's. It determines whether the number of 1's is even or odd, and halts with a message politely telling you its conclusion.
+
+It works by moving right, each step alternating between two states that remember if the current number of 1's is even or odd, then halting with the corresponding even or odd State when it encounters the first blank cell.
+
+### Code
 
 ```ruby
 require_relative './turing_machine'
@@ -66,4 +74,35 @@ end
 puts "The Turing machine halted after #{tm.step + 1} steps!"
 puts tm
 puts tm.state.message
+```
+
+### Console Output
+
+```bash
+bash-3.2$ ruby main.rb
+      ↓
+[     111     ]
+      ↑
+State:move-right-even will write a 1, move right, and switch to State:move-right-odd.
+
+       ↓
+[     111     ]
+       ↑
+State:move-right-odd will write a 1, move right, and switch to State:move-right-even.
+
+        ↓
+[     111     ]
+        ↑
+State:move-right-even will write a 1, move right, and switch to State:move-right-odd.
+
+         ↓
+[     111      ]
+         ↑
+State:move-right-odd will erase the head, move right, and halt.
+
+The Turing machine halted after 5 steps!
+          ↓
+[     111       ]
+          ↑
+There is an odd number of 1's.
 ```
